@@ -26,7 +26,13 @@ export function parseBase64Image(dataUrl: string) {
   }
 
   return {
-    mimeType: matches[1],               
-    bytesBase64Encoded: matches[2],      
+    mimeType: matches[1],
+    bytesBase64Encoded: matches[2],
   };
 }
+
+export type OrderBody = {
+  amount: number;
+  type: string;
+  credits: number;
+};

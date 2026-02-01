@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 import { parseBase64Image } from "@/lib/utils";
 import { GoogleGenAI } from "@google/genai";
 
@@ -8,6 +10,7 @@ const ai = new GoogleGenAI({
 });
 export async function POST(req: Request) {
   try {
+    const userSession = await auth();
     const { prompt, imageUrl } = await req.json();
 
     const img = parseBase64Image(imageUrl);
@@ -31,6 +34,20 @@ export async function POST(req: Request) {
       operation?.response?.generatedVideos?.[0].video?.uri +
         "&key=" +
         process.env.GOOGLE_API_KEY! || "";
+    const user = await prisma.user.findFirst({
+      where: {
+        id: userSession?.user?.id,
+      },
+    });
+
+    await prisma.user.update({
+      where: {
+        id: user?.id,
+      },
+      data: {
+        creadits: user?.creadits ? user.creadits - 10 : 0,
+      },
+    });
     return Response.json({ videoUrl });
   } catch (error) {
     console.log("Error occured while creating video", error);
@@ -39,7 +56,7 @@ export async function POST(req: Request) {
       {
         error: "Error occured while creating video",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

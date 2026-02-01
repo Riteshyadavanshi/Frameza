@@ -1,0 +1,36 @@
+export const plans = [
+  {
+    name: "Starter",
+    price: 10,
+    credits: 300,
+    features: [
+      "Up to 720p videos",
+      "Standard generation speed",
+      "No watermark",
+    ],
+    cta: "Start Starter",
+    popular: false,
+    gradient: "from-blue-500/20 to-cyan-500/20",
+    accentColor: "bg-blue-500",
+  },
+  {
+    name: "Pro",
+    price: 29,
+    credits: 1200,
+    features: ["Up to 1080p videos", "Faster generation", "Commercial usage"],
+    cta: "Go Pro",
+    popular: true,
+    gradient: "from-purple-500/20 to-pink-500/20",
+    accentColor: "bg-gradient-to-r from-purple-500 to-pink-500",
+  },
+  {
+    name: "Studio",
+    price: 79,
+    credits: 4000,
+    features: ["Up to 4k videos", "Fastest generation speed", "No watermark"],
+    cta: "Upgrade to Studio",
+    popular: false,
+    gradient: "from-amber-500/20 to-orange-500/20",
+    accentColor: "bg-amber-500",
+  },
+];

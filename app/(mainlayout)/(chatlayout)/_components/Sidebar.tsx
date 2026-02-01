@@ -1,6 +1,8 @@
+import { auth } from "@/auth";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -8,7 +10,7 @@ import {
 } from "@/components/ui/sidebar";
 import { BadgeIndianRupee, Edit } from "lucide-react";
 import Image from "next/image";
-export const SidebarComponent = () => {
+export const SidebarComponent = async () => {
   const links = [
     {
       title: "Chat",
@@ -17,10 +19,12 @@ export const SidebarComponent = () => {
     },
     {
       title: "Billing",
-      url: "#",
+      url: "/billing",
       icon: BadgeIndianRupee,
     },
   ];
+  const session = await auth();
+
   return (
     <Sidebar className="mt-20" collapsible="icon">
       <SidebarHeader>
@@ -49,6 +53,21 @@ export const SidebarComponent = () => {
           ))}
         </SidebarMenu>
       </SidebarContent>
+      <SidebarFooter className="md:mb-40 mb-10">
+        <div className="flex  gap-x-3 wrap-break-word">
+          <div>
+            <Image
+              src={session?.user?.image as string}
+              width={200}
+              height={200}
+              alt="profile-image"
+              className="  rounded-full size-10  "
+            />
+          </div>
+
+          <span className="md:w-[150px]">{session?.user?.email}</span>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 };

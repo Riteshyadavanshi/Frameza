@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { cn, MessageBubble, Role } from "@/lib/utils";
-import { ArrowDown, Download, Loader2 } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import Image from "next/image";
 
 export const MessageBubbling = (message: MessageBubble) => {
@@ -41,7 +41,7 @@ export const MessageBubbling = (message: MessageBubble) => {
             <video
               src={message.videoUrl}
               controls
-              className="mt-3 rounded-lg object-fill size-[400px]"
+              className="mt-3 rounded-lg object-fill size-100"
             />
           )}
           <div className="bg-white w-30 rounded-lg p-2  mt-4">

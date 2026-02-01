@@ -26,6 +26,12 @@ export const HeroSection = () => {
           >
             Get Started <ArrowUpRight />
           </RedirectBtn>
+          <RedirectBtn
+            url="/subscription"
+            className="bg-indigo-900 text-white   hover:bg-indigo-900/80 cursor-pointer ml-4"
+          >
+            See Plans <ArrowUpRight />
+          </RedirectBtn>
         </div>
       </section>
 
