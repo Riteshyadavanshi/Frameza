@@ -5,22 +5,22 @@ datasource db {
 
 generator client {
   provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  output   = "../lib/generated/prisma",
 }
 
 model User {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String?         @unique
+  email         String?          @unique
   emailVerified DateTime?
   image         String?
-  creadits      Int             @default(100)
+  creadits      Int              @default(100)
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
-  payments    PaymentHistory[]
-  
+  payments      PaymentHistory[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -83,15 +83,14 @@ model Authenticator {
   @@unique([userId, credentialID])
 }
 
+model PaymentHistory {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  credits Int
+  amount  Int
+  type    String
 
-model PaymentHistory{
-   id           String  @id @default(auto()) @map("_id") @db.ObjectId 
-   credits     Int
-   amount    Int
-   type      String
-
-   userId   String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
